@@ -26,15 +26,13 @@ app.get('/', (req: Request, res: Response) => {
 
 app.post('/createuser', async (req, res) => {
     console.log('/createuser: ', req.body);
-    // o take access token from req.body;
+
     const accessToken = req.body.token;
 
-    // o call spotifyService > me func;
     const meData = await me(accessToken);
-    // o from me endpoint get name + email + images;
+
     const { display_name: name, email, images } = meData;
   
-    // o call spotifyService > topArtists func;
     const topArtistsData = await topArtists(accessToken);
     const { items } = topArtistsData;
     const topArtistsList: Artists = items.map((item) => ({
@@ -42,10 +40,8 @@ app.post('/createuser', async (req, res) => {
       popularity: item.popularity,
     }))
 
-    // o create new user in database;
     await upsertUser(email, topArtistsList, [], [], name, images[0].url, accessToken);
 
-    // o create new jwt token -> return
     const token: string = jwt.sign({
       data: email,
     }, 'ssapmoCtrecnoC', { expiresIn: '1h' });
@@ -53,7 +49,6 @@ app.post('/createuser', async (req, res) => {
     return res.json({token});
 });
 
-// get list of top artists
 app.get('/topartists', async (req, res) => {
   try {
     const jwtToken = req.headers.token as string;
@@ -64,9 +59,7 @@ app.get('/topartists', async (req, res) => {
     const decoded: {data: string} = tokenVerify(jwtToken);
     const email = decoded.data;
 
-    // get user from database -> get access token from retrieved user
     const user = await getUser(email);
-    // console.log('user: ', user);
 
     if (user === null) {
       return res.status(204).json({message: 'invalid user'});
@@ -104,22 +97,6 @@ app.delete('/topartists', async (req, res) => {
     return res.status(500).json(error);
   }
 });
-
-// BACKEND BACKEND
-// post create preferred artists
-  //upsertUser savedlist
-  // ticketmaster api call: get events + set going: false
-  // store events in mongo [add 'events' in typoes + model] -> upsertUser(email, undefined, undefined..., events);
-  // res.json({savedArtits, events})
-
-// update set going: true | false
-  // get eventName from req.body
-  // get user -> find event in events array: update going to : opposite
-  // upsertUser(email, undefined, undefined..., events);
-
-// delete remove saved artists
-  //get user email
-  // upsertUser(email, undefined, undefined..., [], [])
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

@@ -21,7 +21,6 @@ export const upsertUser = async(email: string, topArtists?: Artists, savedArtist
     ).exec();
 }
 
-// https://mongoosejs.com/docs/promises.html
 export const getUser = async (email: string): Promise<User> => {
     const user = await UserModel.findOne(
         {

@@ -10,25 +10,12 @@ function App() {
     const REDIRECT_URI = "http://localhost:3000/";
     const RESPONSE_TYPE = "token";
     const SCOPES = [
-        // "ugc-image-upload",
         "user-top-read",
         "user-read-recently-played",
         "user-library-read",
-        // "user-read-playback-state",
-        // "app-remote-control", would be nice for audio/voice control
-        // "playlist-modify-public",
-        // "user-modify-playback-state",
-        // "playlist-modify-private",
-        // "user-follow-modify",
-        // "user-read-currently-playing", this would be nice when you can see timeline with live music playing of friends, just like spotify on desktop
-        // "user-follow-read", good for adding friends to follow on concert compass
-        // "user-library-modify",
-        "user-read-playback-position", /* show popularity score of artist and your position towards artist */
-        // "playlist-read-private",
+        "user-read-playback-position",
         "user-read-email",
         "user-read-private",
-        // "playlist-read-collaborative", nice for merging concerts/shows with friends based on collab playlist
-        // "streaming"
     ];
 
     const [Artists, setArtists] = useState<Artist[]>([]);
