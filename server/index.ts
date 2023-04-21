@@ -25,7 +25,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.post('/createuser', async (req, res) => {
-    console.log('/createuser: ', req.body);
 
     const accessToken = req.body.token;
 
@@ -81,7 +80,6 @@ app.get('/topartists', async (req, res) => {
 });
 
 app.delete('/topartists', async (req, res) => {
-  console.log('\n\n\n\n\n\n\nDELETE CALLL\n\n\n\n\n\n\n');
   try {
     const jwtToken = req.headers.token as string;
     if (typeof jwtToken !== 'string') {
@@ -90,7 +88,6 @@ app.delete('/topartists', async (req, res) => {
 
     const decoded: {data: string} = tokenVerify(jwtToken);
     const email = decoded.data;
-    console.log('email: ', email)
     await upsertUser(email, [], [], []);
     return res.status(204);
   } catch (error) {

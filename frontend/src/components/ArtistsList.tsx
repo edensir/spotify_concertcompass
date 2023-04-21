@@ -15,7 +15,6 @@ export const ArtistsList = () => {
           },
         })
           .then((response) => {
-            console.log('response: ', response.data);
             setArtists(response.data);
           });
       }
@@ -25,7 +24,6 @@ export const ArtistsList = () => {
   }, []);
 
   const clearList = useCallback(async () => {
-    console.log('going to clear list');
     const token = window.localStorage.getItem("token");
     if (token) {
       await axios.delete('http://localhost:8080/topartists', {
@@ -34,7 +32,6 @@ export const ArtistsList = () => {
         },
       })
         .then((response) => {
-          console.log('response: ', response.data);
           setArtists([]);
         });
     }
