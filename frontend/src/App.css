@@ -7,7 +7,7 @@
   font-weight: lighter;
 }
 
-.App_Header {
+.App_Main {
   background-color: black;
   min-height: 100vh;
   display: flex;
@@ -20,11 +20,11 @@
 
 .App_Title {
   font-family: 'Roboto';
-  font-weight: 300;
   font-size: 12px;
   position: absolute;
   bottom: 30px;
   color: rgb(118, 118, 118);
+  opacity: 100%;
   text-transform: initial;
   font-weight: 300;
   opacity: inherit;
@@ -86,6 +86,48 @@
 }
 
 .App_Out:focus {
+  outline: none;
+  color: #fff;
+}
+
+.Artists_List {
+  font-size: 18px;
+}
+
+.Artist_Name {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.Artist_Component {
+  border-bottom:rgb(118, 118, 118) 1px solid;
+}
+
+.Artist_Clear {
+  display: block;
+  text-transform: uppercase;
+  margin: 0 auto;
+  font-size: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 30px;
+  font-family: 'Roboto';
+  font-weight: normal;
+  color: rgb(118, 118, 118);
+  padding: 10px 30px;
+  text-decoration: none;
+  text-transform: initial;
+  position: absolute;
+  top: 50px;
+  right: 200px;
+}
+
+.Artist_Clear:hover {
+  background-color: #323232;
+  color: white;
+}
+
+.Artist_Clear:focus {
   outline: none;
   color: #fff;
 }

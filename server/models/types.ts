@@ -4,17 +4,15 @@ export interface User {
     imageUrl: string;
     topArtists: Artists;
     savedArtists?: Artists;
-    // events
-    auth: {
-        accessToken: string;
-    }
+    events?: Events;
+    accessToken: string;
 }
 
 export type Events = {
     name: string;
     url: string;
     going: boolean;
-}[]
+}[];
 
 export type Artists = {
     name: string;

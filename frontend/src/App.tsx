@@ -1,6 +1,8 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
+import { ArtistsList } from './components/ArtistsList';
+import { Artist } from './models/types';
 
 function App() {
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -29,7 +31,20 @@ function App() {
         // "streaming"
     ];
 
+    const [Artists, setArtists] = useState<Artist[]>([]);
     const [token, setToken] = useState("");
+
+    const storeArtists = useCallback(async (tokenString: string) => {
+        await axios.get('http://localhost:8080/topartists', {
+            headers: {
+                token: tokenString,
+            },
+        })
+            .then((response) => {
+                console.log('response: ', response.data);
+                setArtists(response.data);
+            });
+    }, [setArtists]);
 
     useEffect(() => {
         const hash: string | undefined = window.location?.hash;
@@ -40,10 +55,11 @@ function App() {
             await axios.post('http://localhost:8080/createuser', {
                 token: token,
             })
-                .then((response) => {
+                .then(async (response) => {
                     console.log('response: ', response);
                     setToken(response.data.token);
                     window.localStorage.setItem("token", response.data.token);
+                    storeArtists(response.data.token);
                 });
         }
 
@@ -68,22 +84,25 @@ function App() {
         }
 
         setToken(token);
-    }, []);
+    }, [storeArtists]);
 
     const logout = () => {
-        setToken("")
+        setToken("");
+        console.log('Artists: ', Artists);
         window.localStorage.removeItem("token")
     }
 
     return (
         <div className="App">
-            <header className="App_Header">
+            <div className="App_Main">
                 <h1 className="App_Title">Concert Compass</h1>
                 <h2 className="App_Subtitle">Discover and Book Your Favorite Artists' Shows</h2>
                 {!token ?
                     <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES.join(' ')}`}><button className="App_LoginButton">Connect your Spotify</button></a>
                     : <button className="App_Out" onClick={logout}>Logout</button>}
-            </header>
+
+                { !token ? '' : <div className="App_TopArtists"> <ArtistsList /> </div> }
+            </div>
         </div>
     );
 }

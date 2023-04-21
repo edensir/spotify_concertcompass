@@ -26,6 +26,7 @@ export const me = async (accessToken: string): Promise<SpotifyUser> => {
 
 // https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
 export const topArtists = async (accessToken: string): Promise<TopArtistsResponse> => {
+  console.log('accessToken: ', accessToken);
     try {
         const url = `https://api.spotify.com/v1/me/top/artists`;
         const response = await axios.get(url, {

@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken';
 
-export const tokenVerify = (token: string): string => {
+export const tokenVerify = (token: string): {data: string} => {
     try {
         const decoded = jwt.verify(token, 'ssapmoCtrecnoC');
-        console.log('decoded: ', decoded);
-        return decoded as string;
+        return decoded as {data: string};
       } catch(err) {
         console.log(err);
         throw err;
