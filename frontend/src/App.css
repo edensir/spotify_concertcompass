@@ -7,17 +7,6 @@
   font-weight: lighter;
 }
 
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
-
 .App_Header {
   background-color: black;
   min-height: 100vh;
@@ -32,13 +21,12 @@
 .App_Title {
   font-family: 'Roboto';
   font-weight: 300;
-  font-size: 15px;
+  font-size: 12px;
   position: absolute;
   bottom: 30px;
-  /* left: 50px; */
   color: rgb(118, 118, 118);
   text-transform: initial;
-  font-weight: light;
+  font-weight: 300;
   opacity: inherit;
 }
 
@@ -50,8 +38,6 @@
 }
 
 .App_LoginButton {
-  display: block;
-  text-transform: uppercase;
   margin: 0 auto;
   font-size: 24px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -61,17 +47,16 @@
   font-weight: normal;
   color: rgb(118, 118, 118);
   padding: 10px 30px;
-  text-decoration: none;
+  text-decoration: solid;
   text-transform: initial;
 }
 
 .App_LoginButton:hover {
-  background-color: rgb(118, 118, 118);
+  background-color: #323232;
   color: white;
 }
 
 .App_LoginButton:focus {
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(79, 70, 229, 0.5); */
   outline: none;
   color: #fff;
 }
@@ -104,17 +89,3 @@
   outline: none;
   color: #fff;
 }
-
-/* .App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
- */
